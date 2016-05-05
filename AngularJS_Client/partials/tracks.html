@@ -1,0 +1,20 @@
+<div class="col-sm-12">
+    <h2>Tracks</h2>
+    <table class="table table-bordered">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Track</th>
+            <th>Price</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr data-ng-repeat="track in tracks">
+            <td>{{track.TrackId}}</td>
+            <td>{{track.Name}}</td>
+            <td>{{track.UnitPrice}}</td>
+        </tr>
+        </tbody>
+    </table>
+
+</div>

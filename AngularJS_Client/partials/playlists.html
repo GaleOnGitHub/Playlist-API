@@ -1,0 +1,77 @@
+<div class="col-sm-4">
+    <h2>Your Playlists</h2>
+    <table class="table table-bordered">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Playlist</th>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr data-ng-repeat="playlist in playlists">
+            <td>{{playlist.PlaylistId}}</td>
+            <td>{{playlist.Name}}</td>
+            <td><a data-ng-click="retrievePlaylist(playlist.PlaylistId, $index)">Select</a></td>
+        </tr>
+        </tbody>
+    </table>
+    <button class="btn btn-primary" data-ng-click="newPlaylist()">New Playlist</button>
+    <button class="btn btn-primary" data-ng-click="refreshReport()">Refresh</button>
+    <div data-ng-class="(message.status==200) ? 'alert-success':'alert-danger'" class="alert alert-dismissible" role="alert" data-ng-show="message">
+        <button type="button" class="close" data-ng-click="message=false" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        {{message.message}}
+    </div>
+</div>
+
+<div ng-show="selectedPlaylist" class="col-sm-8">
+
+    <div>
+        <h2>Playlist</h2>
+        <label>Name: <input type="text" ng-model="selectedPlaylist.Name"></label>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <td class="col-sm-11">Track</td>
+                    <td class="col-sm-1"></td>
+                </tr>
+            </thead>
+            <tbody>
+                <tr data-ng-repeat="track in selectedPlaylist.track">
+                    <td>{{track.Name}}</td>
+                <td>
+                    <span class="glyphicon glyphicon-minus-sign" data-ng-click="removeTrack($index)"></span>
+                </td>
+                </tr>
+            </tbody>
+        </table>
+        <div data-ng-show="formType=='Edit'">
+            <button class="btn btn-primary" data-ng-click="updatePlaylist(selectedPlaylist.PlaylistId)">Update</button>
+            <button class="btn btn-primary" data-ng-click="retrievePlaylist(selectedPlaylist.PlaylistId)">Cancel</button>
+            <button class="btn btn-danger" data-ng-click="deletePlaylist(selectedPlaylist.PlaylistId)">Delete</button>
+        </div>
+        <div data-ng-show="formType=='Create'">
+            <button class="btn btn-primary" data-ng-click="addPlaylist()">Create</button>
+        </div>
+    </div>
+
+    <div >
+        <h2>Tracks</h2>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <td class="col-sm-11">Track</td>
+                    <td class="col-sm-1"></td>
+                </tr>
+            </thead>
+            <tbody>
+                <tr data-ng-repeat="track in trackList">
+                    <td>{{track.Name}}</td>
+                    <td>
+                        <span class="glyphicon glyphicon-plus-sign" data-ng-click="addTrack($index)"></span>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
